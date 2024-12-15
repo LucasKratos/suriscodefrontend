@@ -1,22 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import {
+  Box,
   Button,
-  Checkbox,
   CircularProgress,
   Dialog,
   DialogActions,
-  DialogContent, DialogContentText,
+  DialogContent,
+  DialogContentText,
   DialogTitle,
-  FormControl,
-  FormControlLabel,
-  FormGroup,
-  InputLabel,
-  MenuItem,
-  Select,
 } from '@mui/material';
 import apiClient from '../api/apiClient';
-import FormLabel from '@mui/material/FormLabel';
-import Box from '@mui/material/Box';
+import SellerSelector from './SellerSelector';
+import ArticleSelector from './ArticleSelector';
 
 const AddPurchase = () => {
   const [articles, setArticles] = useState([]);
@@ -91,18 +86,6 @@ const AddPurchase = () => {
 
   const isSubmitEnabled = selectedArticles.length > 0 && selectedSeller;
 
-  const validArticles = articles
-    .filter((article) => article.deposito === 1)
-    .reduce((uniqueArticles, currentArticle) => {
-      const isDuplicate = uniqueArticles.some(
-        (article) => article.codigo === currentArticle.codigo
-      );
-      if (!isDuplicate) {
-        uniqueArticles.push(currentArticle);
-      }
-      return uniqueArticles;
-    }, []);
-
   return (
     <>
       <Box
@@ -113,50 +96,18 @@ const AddPurchase = () => {
           gap: 2,
         }}
       >
-        <FormControl>
-          <FormLabel htmlFor="articlesSelect">Seleccionar Artículos</FormLabel>
-          {loading.articles ? (
-            <CircularProgress />
-          ) : (
-            <FormGroup>
-              {validArticles.map((article) => (
-                <FormControlLabel
-                  key={article.codigo}
-                  control={
-                    <Checkbox
-                      checked={selectedArticles.some(
-                        (a) => a.codigo === article.codigo
-                      )}
-                      onChange={() => handleArticleToggle(article)}
-                    />
-                  }
-                  label={`${article.descripcion} AR$${article.precio}`}
-                />
-              ))}
-            </FormGroup>
-          )}
-        </FormControl>
-        <FormControl variant="filled" margin={"dense"}>
-          <InputLabel id="selectSellerLabel">Seleccionar Vendedor</InputLabel>
-          <Select
-            fullWidth
-            labelId="selectSellerLabel"
-            id="sellerSelect"
-            label="Seleccionar Vendedor"
-            value={selectedSeller}
-            onChange={handleSellerChange}
-          >
-            {loading.sellers ? (
-              <MenuItem disabled>Cargando...</MenuItem>
-            ) : (
-              sellers.map((seller) => (
-                <MenuItem key={seller.id} value={seller}>
-                  {seller.descripcion}
-                </MenuItem>
-              ))
-            )}
-          </Select>
-        </FormControl>
+        <ArticleSelector
+          articles={articles}
+          selectedArticles={selectedArticles}
+          onToggleArticle={handleArticleToggle}
+          loading={loading.articles}
+        />
+        <SellerSelector
+          sellers={sellers}
+          selectedSeller={selectedSeller}
+          onSellerChange={handleSellerChange}
+          loading={loading.sellers}
+        />
         <Button
           variant="contained"
           color={!isSubmitEnabled ? "error" : "primary"}
