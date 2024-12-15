@@ -8,7 +8,6 @@ El diseño incluye:
 - Listados interactivos con checkboxes para seleccionar artículos.
 - Modales informativos para mostrar mensajes de éxito o error.
 - Un diseño centrado y responsivo.
-
 ---
 
 ## Tecnologías Utilizadas
@@ -76,7 +75,7 @@ El diseño incluye:
    - Asegúrate de que el backend esté corriendo antes de iniciar este proyecto.
 
 2. **Estilos y Diseño:**
-   - Se utiliza **Material-UI** con personalización de estilos en un archivo CSS aparte (`MarketplaceDashboard.css`).
+   - Se utiliza **Material-UI** con personalización de estilos especificos de MUI.
    - Los estilos incluyen centrado del componente, bordes redondeados, y efectos visuales como sombras y gradientes.
 
 3. **Configuración de Axios:**
