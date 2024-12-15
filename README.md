@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-
 # SurisCodeFrontend
 
 ## Descripción
@@ -17,7 +15,6 @@ El diseño incluye:
 - **React**: Biblioteca para crear interfaces de usuario.
 - **Material-UI**: Biblioteca para estilizar componentes.
 - **Axios**: Cliente HTTP para interactuar con APIs REST.
-- **CSS**: Personalización de estilos para el diseño.
 
 ---
 
